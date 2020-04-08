@@ -43,7 +43,7 @@ namespace Snake
             Console.BufferHeight = Console.WindowHeight;
             lastFoodTime = Environment.TickCount;
 
-            List<Position> obstacles = new List<Position>()
+            List<Position> obstacles = new List<Position>() //the coordinates of the obstacles
             {
                 new Position(12, 12),
                 new Position(14, 20),
@@ -51,7 +51,7 @@ namespace Snake
                 new Position(19, 19),
                 new Position(6, 9),
             };
-            foreach (Position obstacle in obstacles)
+            foreach (Position obstacle in obstacles) //the obstacles which kill the snake
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.SetCursorPosition(obstacle.col, obstacle.row);
@@ -64,7 +64,7 @@ namespace Snake
                 snakeElements.Enqueue(new Position(0, i));
             }
 
-            Position food;
+            Position food; //the position/coordinates of the food
             do
             {
                 food = new Position(randomNumbersGenerator.Next(0, Console.WindowHeight),
@@ -73,7 +73,7 @@ namespace Snake
             while (snakeElements.Contains(food) || obstacles.Contains(food));
             Console.SetCursorPosition(food.col, food.row);
             Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("@");
+            Console.Write("@"); 
 
             foreach (Position position in snakeElements)
             {
@@ -82,7 +82,7 @@ namespace Snake
                 Console.Write("*");
             }
 
-            while (true)
+            while (true) //Snake movement/gameplay rules
             {
                 negativePoints++;
 
@@ -132,9 +132,9 @@ namespace Snake
 
                 Console.SetCursorPosition(snakeHead.col, snakeHead.row);
                 Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.Write("*");
+                Console.Write("*"); //Snake Body
 
-                snakeElements.Enqueue(snakeNewHead);
+                snakeElements.Enqueue(snakeNewHead); //Snake Head
                 Console.SetCursorPosition(snakeNewHead.col, snakeNewHead.row);
                 Console.ForegroundColor = ConsoleColor.Gray;
                 if (direction == right) Console.Write(">");
@@ -158,7 +158,7 @@ namespace Snake
                     Console.Write("@");
                     sleepTime--;
 
-                    Position obstacle = new Position();
+                    Position obstacle = new Position(); //Random position of obstacles("=")
                     do
                     {
                         obstacle = new Position(randomNumbersGenerator.Next(0, Console.WindowHeight),
