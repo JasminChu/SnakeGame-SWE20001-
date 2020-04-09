@@ -67,13 +67,7 @@ namespace Snake
             {
                 snakeElements.Enqueue(new Position(0, i));
             }
-
-
-
-
-
-            //SOMEONEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
-
+            
 
             Position food;
             do
@@ -85,6 +79,14 @@ namespace Snake
             Console.SetCursorPosition(food.col, food.row);
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("@");
+
+
+
+
+
+
+            //SOMEONEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+
 
             foreach (Position position in snakeElements)
             {
@@ -141,15 +143,6 @@ namespace Snake
                     return;
                 }
 
-
-
-
-
-
-                //JASMINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
-
-
-
                 Console.SetCursorPosition(snakeHead.col, snakeHead.row);
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.Write("*");
@@ -161,6 +154,24 @@ namespace Snake
                 if (direction == left) Console.Write("<");
                 if (direction == up) Console.Write("^");
                 if (direction == down) Console.Write("v");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                //JASMINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+
 
 
                 if (snakeNewHead.col == food.col && snakeNewHead.row == food.row)
