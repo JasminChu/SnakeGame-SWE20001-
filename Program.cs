@@ -199,7 +199,8 @@ namespace Snake
                     Console.Write(" ");
                 }
 
-                if (Environment.TickCount - lastFoodTime >= foodDissapearTime) //if the (Environment.TickCount -time of last food) is greater than the time of food dissapear
+                if (Environment.TickCount - lastFoodTime >= foodDissapearTime) //if the (Environment.TickCount -time of last food) is greater than 
+                                                                               //the time of food dissapear
                 {
                     negativePoints = negativePoints + 50;
                     Console.SetCursorPosition(food.col, food.row);
@@ -209,7 +210,8 @@ namespace Snake
                         food = new Position(randomNumbersGenerator.Next(0, Console.WindowHeight), //create new food
                             randomNumbersGenerator.Next(0, Console.WindowWidth));
                     }
-                    while (snakeElements.Contains(food) || obstacles.Contains(food)); //if snake eat food or obstacle and food appear at the same position
+                    while (snakeElements.Contains(food) || obstacles.Contains(food)); //if snake eat food or obstacle and food appear at 
+                                                                                      //the same position
                     lastFoodTime = Environment.TickCount;
                 }
 
