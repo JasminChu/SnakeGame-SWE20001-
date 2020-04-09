@@ -18,6 +18,10 @@ namespace Snake
         }
     }
 
+
+    //SOMEONEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+
+
     class Program
     {
         static void Main(string[] args)
@@ -63,6 +67,13 @@ namespace Snake
             {
                 snakeElements.Enqueue(new Position(0, i));
             }
+
+
+
+
+
+            //SOMEONEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+
 
             Position food;
             do
@@ -129,6 +140,15 @@ namespace Snake
                     Console.WriteLine("Your points are: {0}", userPoints);
                     return;
                 }
+
+
+
+
+
+
+                //JASMINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+
+
 
                 Console.SetCursorPosition(snakeHead.col, snakeHead.row);
                 Console.ForegroundColor = ConsoleColor.DarkGray;
