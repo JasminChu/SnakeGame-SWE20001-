@@ -199,7 +199,8 @@ namespace Snake
                     }
                     while (snakeElements.Contains(obstacle) || //if snake eat the obstacle
                         obstacles.Contains(obstacle) ||         //if obstacles appear at the same position
-                        (food.row != obstacle.row && food.col != obstacle.row)); //the position of food and obstacle is different
+                        (food.row != obstacle.row && food.col != obstacle.row)); 
+                    //the position of food and obstacle is different
                     obstacles.Add(obstacle); //then obstacle will be generated
                     Console.SetCursorPosition(obstacle.col, obstacle.row);
                     Console.ForegroundColor = ConsoleColor.Cyan;
@@ -207,7 +208,7 @@ namespace Snake
                 }
                 else
                 {
-                    // moving... if didn't meet the conditions above then the snake will keep moving
+                    // moving...if didn't meet the conditions above then the snake will keep moving
                     Position last = snakeElements.Dequeue();
                     Console.SetCursorPosition(last.col, last.row);
                     Console.Write(" ");
