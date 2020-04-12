@@ -83,7 +83,7 @@ namespace Snake
             }
 
             //The position is create randomly
-            //creating food
+            //creating food in the game
             Position food; 
             do
             {
