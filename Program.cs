@@ -212,16 +212,18 @@ namespace Snake
                 else
                 {
                     // moving...if didn't meet the conditions above then the snake will keep moving
-                    Position last = snakeElements.Dequeue();
+                    Position last = snakeElements.Dequeue(); 
+                    //The snake position will be set to the begining of the snakeElements 
+                    //“Dequeue” which is used to remove and return the begining object
                     Console.SetCursorPosition(last.col, last.row);
                     Console.Write(" ");
                 }
 
-                //if the (Environment.TickCount -time of last food) is greater than the time of food dissapear
+                 //If the food appear at the console window (whole game time minus time of last food） is greater than the foodDissapearTime which intialise is 8000
                 if (Environment.TickCount - lastFoodTime >= foodDissapearTime) 
                 {
                     negativePoints = negativePoints + 50;
-                    Console.SetCursorPosition(food.col, food.row);
+                    Console.SetCursorPosition(food.col, food.row); //the cursor position will set to the food position.
                     Console.Write(" ");
                     do
                     {
@@ -230,7 +232,7 @@ namespace Snake
                     }
                     //if snake eat food or obstacle and food appear at the same position
                     while (snakeElements.Contains(food) || obstacles.Contains(food)); 
-                    lastFoodTime = Environment.TickCount;
+                    lastFoodTime = Environment.TickCount; //The lastFoodTime will reset to the present time
                 }
 
                 Console.SetCursorPosition(food.col, food.row); //creating food
