@@ -160,7 +160,8 @@ namespace Snake
                     return;
                 }
 
-                Console.SetCursorPosition(snakeHead.col, snakeHead.row); //Set the position of the snake
+                //Set the position of the snake
+                Console.SetCursorPosition(snakeHead.col, snakeHead.row); 
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.Write("*");
 
