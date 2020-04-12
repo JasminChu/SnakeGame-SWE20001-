@@ -30,7 +30,9 @@ namespace Snake
             int foodDissapearTime = 8000;
             int negativePoints = 0;
 
-            Position[] directions = new Position[] //position to create food, obstacles, etc
+            //Array which is a linear data structure is used 
+            //position store direction (array)
+            Position[] directions = new Position[] 
             {
                 new Position(0, 1), // right
                 new Position(0, -1), // left
@@ -43,7 +45,11 @@ namespace Snake
             Console.BufferHeight = Console.WindowHeight;
             lastFoodTime = Environment.TickCount;
 
-            List<Position> obstacles = new List<Position>()   //list to store position of obstacles
+            //Linked List which is a linear data structure is used 
+            //Creating a linkedlist 
+            //Using List class 
+            //list to store position of obstacles
+            List<Position> obstacles = new List<Position>()   
             {
                 new Position(12, 12),
                 new Position(14, 20),
@@ -59,7 +65,9 @@ namespace Snake
                 Console.Write("=");
             }
 
-            Queue<Position> snakeElements = new Queue<Position>(); //creating snake body (5 "*")
+            //creating snake body (5 "*")
+            //Queue which is a linear data structure is used 
+            Queue<Position> snakeElements = new Queue<Position>(); 
             for (int i = 0; i <= 5; i++)
             {
                 snakeElements.Enqueue(new Position(0, i));
@@ -122,6 +130,7 @@ namespace Snake
                 if (snakeNewHead.col >= Console.WindowWidth) snakeNewHead.col = 0;
 
                 //the game will over if the snake eat its body OR eat the obstacles
+                //Stack which is a linear data structure is used
                 if (snakeElements.Contains(snakeNewHead) || obstacles.Contains(snakeNewHead))
                 {
                     Console.SetCursorPosition(0, 0);
