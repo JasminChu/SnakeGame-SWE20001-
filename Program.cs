@@ -178,7 +178,7 @@ namespace Snake
                 //when the snake eat the food
                 if (snakeNewHead.col == food.col && snakeNewHead.row == food.row) 
                 {
-                    // feeding the snake
+                    //feeding the snake
                     //generate new position for the food
                     do
                     {
