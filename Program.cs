@@ -164,7 +164,8 @@ namespace Snake
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.Write("*");
 
-                snakeElements.Enqueue(snakeNewHead); //draw the snake head according to different direction
+                //draw the snake head according to different direction
+                snakeElements.Enqueue(snakeNewHead); 
                 Console.SetCursorPosition(snakeNewHead.col, snakeNewHead.row);
                 Console.ForegroundColor = ConsoleColor.Gray;
                 if (direction == right) Console.Write(">");
@@ -191,7 +192,7 @@ namespace Snake
                     sleepTime--;
 
                     Position obstacle = new Position();
-                    //generate new position for the obstacle
+                    //generate new position for the obstacles
                     do
                     {
                         obstacle = new Position(randomNumbersGenerator.Next(0, Console.WindowHeight), 
