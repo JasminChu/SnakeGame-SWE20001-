@@ -60,7 +60,7 @@ namespace Snake
 
             //For each loop
             //Each obstacle in List(obstacles) to set the color, position
-            //Print out the obstacle from the list
+            //Print out the obstacle
             foreach (Position obstacle in obstacles)
             {
                 //drawing obstacles
