@@ -81,9 +81,10 @@ namespace Snake
             {
                 snakeElements.Enqueue(new Position(0, i));
             }
-            
+
             //The position is create randomly
-            Position food; //creating food
+            //creating food
+            Position food; 
             do
             {
                 food = new Position(randomNumbersGenerator.Next(0, Console.WindowHeight),
