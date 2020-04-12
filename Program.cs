@@ -191,7 +191,7 @@ namespace Snake
                     sleepTime--;
 
                     Position obstacle = new Position();
-                    //generate new position for the obstacles
+                    //generate new position for the obstacle
                     do
                     {
                         obstacle = new Position(randomNumbersGenerator.Next(0, Console.WindowHeight), 
