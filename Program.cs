@@ -5,6 +5,7 @@ using System.Text;
 using System.Collections;
 using System.Threading;
 using System.Media;
+using System.Windows.Forms;
 
 namespace Snake
 {
@@ -150,8 +151,6 @@ namespace Snake
                     }
                 }
 
-
-
                 //manage the position of the snake head if the snake exceed the width or height of the console window
                 //if the snake disappear at the bottom, it will reappear from the top
                 Position snakeHead = snakeElements.Last();
@@ -175,16 +174,38 @@ namespace Snake
                     player1.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "/die.wav";
                     player1.Play();
 
-                    Console.SetCursorPosition(0, 0);
+                    //--------------------------------------GameOver-------------------------------------------
                     Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Game over!");
+                    string gameover = "Game over!";
+                    string points = "Your points are: {0}";
+                    int height = decimal.ToInt32((Console.WindowHeight) / 2);
+                    int width = decimal.ToInt32((Console.WindowWidth - gameover.Length) / 2);
                     int userPoints = (snakeElements.Count - 6) * 100 - negativePoints;
                     //if (userPoints < 0) userPoints = 0;
                     userPoints = Math.Max(userPoints, 0);
-                    Console.WriteLine("Your points are: {0}", userPoints); //displayed when game over
+                    
+                    Console.SetCursorPosition(width, height);
+                    Console.WriteLine(gameover,userPoints);
+                   
+                    width = decimal.ToInt32((Console.WindowWidth - points.Length) / 2);
+                    height = decimal.ToInt32((Console.WindowHeight) / 2)+1;
+                    Console.SetCursorPosition(width, height);
+                    Console.WriteLine(points, userPoints);
+                    //displayed when game over
                     //JASMINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
-                    Console.ReadLine();
-                    Console.ReadLine();
+                    //--------------------------------------Exit Game-------------------------------------------
+                    string exit = "Press Enter to exit.";
+                    width = decimal.ToInt32((Console.WindowWidth - exit.Length) / 2);
+                    height = decimal.ToInt32((Console.WindowHeight) / 2) + 1;
+
+                    Console.SetCursorPosition(width, height);
+                    Console.WriteLine(exit);
+
+                    while (Console.ReadKey().Key != ConsoleKey.Enter)
+                    {
+                        Console.WriteLine(exit);
+                    }
+                    Environment.Exit(0);
                 }
 
                 //Set the position of the snake
@@ -248,8 +269,11 @@ namespace Snake
                     Console.Write(" ");
                 }
 
-                //If the food appear at the console window (whole game time minus time of last food） is greater than the foodDissapearTime which intialise is 8000
-                if (Environment.TickCount - lastFoodTime >= foodDissapearTime)
+                //If the food appear at the console window (whole game time minus time of last food）
+                //is greater than the foodDissapearTime which intialise is 8000
+                //------------------------------FoodRelocateTime--------------------------------------
+                //add another 5000 time to extend the food relocate time
+                if (Environment.TickCount - lastFoodTime >= foodDissapearTime+5000)
                 {
                     negativePoints = negativePoints + 50;
                     Console.SetCursorPosition(food.col, food.row); //the cursor position will set to the food position.

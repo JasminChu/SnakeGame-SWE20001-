@@ -12,3 +12,10 @@ C:\Users\User\Desktop\Swinburne Uni\D2SEM1 (2020)\SWE20001\Week 5\Snake\Snake\ob
 C:\Users\User\Desktop\Swinburne Uni\D2SEM1 (2020)\SWE20001\Week 5\Snake\Snake\obj\Debug\Snake.csproj.CoreCompileInputs.cache
 C:\Users\User\Desktop\Swinburne Uni\D2SEM1 (2020)\SWE20001\Week 5\Snake\Snake\obj\Debug\Snake.exe
 C:\Users\User\Desktop\Swinburne Uni\D2SEM1 (2020)\SWE20001\Week 5\Snake\Snake\obj\Debug\Snake.pdb
+C:\Users\User\Desktop\Development\PassTask5\SnakeGame-SWE20001-\bin\Debug\Snake.exe.config
+C:\Users\User\Desktop\Development\PassTask5\SnakeGame-SWE20001-\bin\Debug\Snake.exe
+C:\Users\User\Desktop\Development\PassTask5\SnakeGame-SWE20001-\bin\Debug\Snake.pdb
+C:\Users\User\Desktop\Development\PassTask5\SnakeGame-SWE20001-\obj\Debug\Snake.csprojAssemblyReference.cache
+C:\Users\User\Desktop\Development\PassTask5\SnakeGame-SWE20001-\obj\Debug\Snake.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\Development\PassTask5\SnakeGame-SWE20001-\obj\Debug\Snake.exe
+C:\Users\User\Desktop\Development\PassTask5\SnakeGame-SWE20001-\obj\Debug\Snake.pdb
