@@ -18,7 +18,41 @@ namespace Snake
             this.col = col;
         }
     }
+    
+    class Scoreboard
+    {
+        public static int origRow;
+        public static int origCol;
 
+        public static void WriteAt(string s, int x, int y)
+        {
+            try
+            {
+                Console.SetCursorPosition(origCol + x, origRow + y);
+                Console.Write(s);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Console.Clear();
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        public static void WriteScore(int s, int x, int y)
+        {
+            try
+            {
+                Console.SetCursorPosition(origCol + x, origRow + y);
+                Console.Write(s);
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+                Console.Clear();
+                Console.WriteLine(e.Message);
+            }
+        }
+    }
+    
     class Program
     {
         //draw the food
@@ -82,6 +116,17 @@ namespace Snake
             int lastFoodTime = 0;
             int foodDissapearTime = 8000;
             int negativePoints = 0;
+            int winningscore = 10;
+            int _scorecount = 0;
+
+            if(File.Exists("winner.txt") == true)
+            {
+                string previouswinner = File.ReadAllText("winner.txt");
+                Scoreboard.WriteAt("Previous Winner: "+previouswinner, 0, 0);
+            }
+            Scoreboard.WriteAt("Your Current Score", 0, 1);
+            Scoreboard.WriteScore(_scorecount, 0, 2);
+            
 
             //Array which is a linear data structure is used 
             //position store direction (array)
@@ -138,7 +183,7 @@ namespace Snake
             Queue<Position> snakeElements = new Queue<Position>();
             for (int i = 0; i <= 3; i++)
             {
-                snakeElements.Enqueue(new Position(0, i));
+                snakeElements.Enqueue(new Position(5, i));
             }
 
             //The position is create randomly
@@ -254,6 +299,38 @@ namespace Snake
                 //when the snake eat the food
                 if (snakeNewHead.col == food.col && snakeNewHead.row == food.row)
                 {
+                    _scorecount += 1;
+                    Scoreboard.WriteAt("Your Current Score", 0, 1);
+                    Scoreboard.WriteScore(_scorecount, 0, 2);
+
+                    if(_scorecount == winningscore)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        string gamewon = "You have won the game!";
+                        int height = decimal.ToInt32((Console.WindowHeight) / 2);
+                        int width = decimal.ToInt32((Console.WindowWidth - gamewon.Length) / 2);
+
+                        Console.SetCursorPosition(width, height);
+                        Console.WriteLine("You have won the game!");
+                        Console.SetCursorPosition(width, height + 1);
+                        Console.WriteLine("Your points are: " + _scorecount);
+
+                        
+                        Console.WriteLine("Please write your name");
+                        string winner = Console.ReadLine();
+                        Console.WriteLine("Winner Saved!");
+                        File.WriteAllText("winner.txt", winner + " with score " + _scorecount);
+                        string previouswinner = File.ReadAllText("winner.txt");
+                        Console.WriteLine(previouswinner);
+
+                        Console.WriteLine("Press Enter to exit.");
+
+                        while (Console.ReadKey().Key != ConsoleKey.Enter)
+                        {
+                            Console.WriteLine("Press Enter to exit.");
+                        }
+                        Environment.Exit(0);
+                    }
                     //feeding the snake
                     //generate new position for the food
                     food = CreateFood(food, randomNumbersGenerator, snakeElements, obstacles);
