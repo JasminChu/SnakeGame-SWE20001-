@@ -5,32 +5,9 @@ using System.Text;
 using System.Collections;
 using System.Threading;
 using System.Media;
-using System.Windows.Forms;
 
 namespace Snake
 {
-    //draw the food
-    static void DrawFood()
-    {
-      Console.ForegroundColor = ConsoleColor.Yellow;
-      Console.Write("@");
-    }
-    //draw obstacles
-    static void DrawObstacle()
-    {
-      Console.ForegroundColor = ConsoleColor.Cyan;
-      Console.Write("=");
-    }
-    //Print words at center
-    static int PrintAtCenter(string printout, int height, int width)
-    {
-        width = decimal.ToInt32((Console.WindowWidth - printout.Length) / 2);
-        height += 1;
-        Console.SetCursorPosition(width, height);
-        Console.WriteLine(printout);
-        return height;
-    }
-    
     struct Position
     {
         public int row;
@@ -44,6 +21,53 @@ namespace Snake
 
     class Program
     {
+        //draw the food
+        static Position CreateFood(Position food, Random randomNumbersGenerator, 
+            Queue<Position> snakeElements, List<Position> obstacles)
+        {
+            do
+            {
+                food = new Position(randomNumbersGenerator.Next(0, Console.WindowHeight),
+                    randomNumbersGenerator.Next(0, Console.WindowWidth));
+            }
+            //new food will be created if snake eat food OR obstacle has the same position with food
+            while (snakeElements.Contains(food) || obstacles.Contains(food));
+            Console.SetCursorPosition(food.col, food.row);
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("@");
+            return food;
+        }
+
+        //draw obstacles
+        static Position CreateObstacle(Position food,Position obstacle, Random randomNumbersGenerator, 
+            Queue<Position> snakeElements, List<Position> obstacles)
+        {
+            do
+            {
+                obstacle = new Position(randomNumbersGenerator.Next(0, Console.WindowHeight),
+                    randomNumbersGenerator.Next(0, Console.WindowWidth));
+            }
+            while (snakeElements.Contains(obstacle) || //if snake eat the obstacle
+                        obstacles.Contains(obstacle) ||         //if obstacles appear at the same position
+                        (food.row != obstacle.row && food.col != obstacle.row));
+            //the position of food and obstacle is different
+            obstacles.Add(obstacle); //then obstacle will be generated
+            Console.SetCursorPosition(obstacle.col, obstacle.row);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write("=");
+            return obstacle;
+        }
+
+        //Print words at center
+        static int PrintAtCenter(string printout, int height, int width)
+        {
+            width = decimal.ToInt32((Console.WindowWidth - printout.Length) / 2);
+            height += 1;
+            Console.SetCursorPosition(width, height);
+            Console.WriteLine(printout);
+            return height;
+        }
+
         static void Main(string[] args)
         {
             //backgorund sound is played when the player start the game
@@ -98,8 +122,9 @@ namespace Snake
             {
 
                 //drawing obstacles
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.SetCursorPosition(obstacle.col, obstacle.row);
-                DrawObstacle();
+                Console.Write("=");
             }
 
             //creating snake body (5 "*")
@@ -118,16 +143,8 @@ namespace Snake
 
             //The position is create randomly
             //creating food in the game
-            Position food;
-            do
-            {
-                food = new Position(randomNumbersGenerator.Next(0, Console.WindowHeight),
-                    randomNumbersGenerator.Next(0, Console.WindowWidth));
-            }
-            //new food will be created if snake eat food OR obstacle has the same position with food
-            while (snakeElements.Contains(food) || obstacles.Contains(food));
-            Console.SetCursorPosition(food.col, food.row);
-            DrawFood();
+            Position food = new Position();
+            food = CreateFood(food, randomNumbersGenerator, snakeElements, obstacles);
 
             //drawing snake body ("*")
             //set color and position of each of the part of body in snakeElements
@@ -198,7 +215,7 @@ namespace Snake
 
                     int height = decimal.ToInt32((Console.WindowHeight) / 2);
                     int width = decimal.ToInt32((Console.WindowWidth - gameover.Length) / 2);
-                    
+
                     int userPoints = (snakeElements.Count - 6) * 100 - negativePoints;
                     //if (userPoints < 0) userPoints = 0;
                     userPoints = Math.Max(userPoints, 0);
@@ -206,7 +223,7 @@ namespace Snake
                     //print Game over and points
                     height = PrintAtCenter(gameover, height, width);
                     height = PrintAtCenter(points + userPoints, height, width);
-                    
+
                     //------------------------------------------------Exit Game----------------------------------------------------
                     
                     //Print Exit Game
@@ -237,36 +254,14 @@ namespace Snake
                 //when the snake eat the food
                 if (snakeNewHead.col == food.col && snakeNewHead.row == food.row)
                 {
-
                     //feeding the snake
                     //generate new position for the food
-                    do
-                    {
-                        food = new Position(randomNumbersGenerator.Next(0, Console.WindowHeight),
-                            randomNumbersGenerator.Next(0, Console.WindowWidth));
-                    }
-                    //if the snake eat the food or obstacles has the same position with food
-                    while (snakeElements.Contains(food) || obstacles.Contains(food));
-
-                    lastFoodTime = Environment.TickCount;
-                    Console.SetCursorPosition(food.col, food.row);
-                    DrawFood();
+                    food = CreateFood(food, randomNumbersGenerator, snakeElements, obstacles);
                     sleepTime--;
 
                     Position obstacle = new Position();
                     //generate new position for the obstacles
-                    do
-                    {
-                        obstacle = new Position(randomNumbersGenerator.Next(0, Console.WindowHeight),
-                            randomNumbersGenerator.Next(0, Console.WindowWidth));
-                    }
-                    while (snakeElements.Contains(obstacle) || //if snake eat the obstacle
-                        obstacles.Contains(obstacle) ||         //if obstacles appear at the same position
-                        (food.row != obstacle.row && food.col != obstacle.row));
-                    //the position of food and obstacle is different
-                    obstacles.Add(obstacle); //then obstacle will be generated
-                    Console.SetCursorPosition(obstacle.col, obstacle.row);
-                    DrawObstacle();
+                    obstacle = CreateObstacle(food,obstacle,randomNumbersGenerator,snakeElements,obstacles);
                 }
                 else
                 {
@@ -280,25 +275,19 @@ namespace Snake
 
                 //If the food appear at the console window (whole game time minus time of last food）
                 //is greater than the foodDissapearTime which intialise is 8000
+                
                 //----------------------------------------------FoodRelocateTime--------------------------------------------------
+                
                 //add another 5000 time to extend the food relocate time
-                if (Environment.TickCount - lastFoodTime >= foodDissapearTime+5000)
+                if (Environment.TickCount - lastFoodTime >= foodDissapearTime + 5000)
                 {
                     negativePoints = negativePoints + 50;
                     Console.SetCursorPosition(food.col, food.row); //the cursor position will set to the food position.
                     Console.Write(" ");
-                    do
-                    {
-                        food = new Position(randomNumbersGenerator.Next(0, Console.WindowHeight), //create new food
-                            randomNumbersGenerator.Next(0, Console.WindowWidth));
-                    }
-                    //if snake eat food or obstacle and food appear at the same position
-                    while (snakeElements.Contains(food) || obstacles.Contains(food));
+
+                    food = CreateFood(food, randomNumbersGenerator, snakeElements, obstacles);
                     lastFoodTime = Environment.TickCount; //The lastFoodTime will reset to the present time
                 }
-
-                Console.SetCursorPosition(food.col, food.row); //creating food
-               DrawFood();
 
                 sleepTime -= 0.01;
 
