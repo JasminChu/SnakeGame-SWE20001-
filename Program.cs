@@ -21,7 +21,15 @@ namespace Snake
       Console.ForegroundColor = ConsoleColor.Cyan;
       Console.Write("=");
     }
-    
+    //Print words at center
+    static int PrintAtCenter(string printout, int height, int width)
+    {
+        width = decimal.ToInt32((Console.WindowWidth - printout.Length) / 2);
+        height += 1;
+        Console.SetCursorPosition(width, height);
+        Console.WriteLine(printout);
+        return height;
+    }
     
     struct Position
     {
@@ -185,39 +193,29 @@ namespace Snake
                     //------------------------------------------------GameOver----------------------------------------------------
                     Console.ForegroundColor = ConsoleColor.Red;
                     string gameover = "Game over!";
-                    string points = "Your points are: {0}";
+                    string points = "Your points are: ";
+                    string exit = "Press Enter to exit.";
+
                     int height = decimal.ToInt32((Console.WindowHeight) / 2);
                     int width = decimal.ToInt32((Console.WindowWidth - gameover.Length) / 2);
+                    
                     int userPoints = (snakeElements.Count - 6) * 100 - negativePoints;
-                    Console.WriteLine(userPoints);
-
                     //if (userPoints < 0) userPoints = 0;
                     userPoints = Math.Max(userPoints, 0);
 
-                    Console.SetCursorPosition(width, height);
-                    Console.WriteLine(gameover);
-
-                    width = decimal.ToInt32((Console.WindowWidth - points.Length) / 2);
-                    height += 1;
-
-                    Console.SetCursorPosition(width, height);
-                    Console.WriteLine(points, userPoints);
-
-
+                    //print Game over and points
+                    height = PrintAtCenter(gameover, height, width);
+                    height = PrintAtCenter(points + userPoints, height, width);
+                    
                     //------------------------------------------------Exit Game----------------------------------------------------
-                    string exit = "Press Enter to exit.";
+                    
+                    //Print Exit Game
+                    height = PrintAtCenter(exit, height, width);
 
-                    width = decimal.ToInt32((Console.WindowWidth - exit.Length) / 2);
-                    height += 1;
-
-                    Console.SetCursorPosition(width, height);
-                    Console.WriteLine(exit);
-
+                    //Make a loop until user press enter key to exit the game
                     while (Console.ReadKey().Key != ConsoleKey.Enter)
                     {
-                        height += 1;
-                        Console.SetCursorPosition(width, height);
-                        Console.WriteLine(exit);
+                        height = PrintAtCenter(exit, height, width);
                     }
                     Environment.Exit(0);
                 }
