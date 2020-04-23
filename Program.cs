@@ -59,9 +59,9 @@ namespace Snake
         }
 
         //Print words at center
-        static int PrintAtCenter(string printout, int height, int width)
+        static int PrintAtCenter(string printout, int height)
         {
-            width = decimal.ToInt32((Console.WindowWidth - printout.Length) / 2);
+            int width = decimal.ToInt32((Console.WindowWidth - printout.Length) / 2);
             height += 1;
             Console.SetCursorPosition(width, height);
             Console.WriteLine(printout);
@@ -221,18 +221,18 @@ namespace Snake
                     userPoints = Math.Max(userPoints, 0);
 
                     //print Game over and points
-                    height = PrintAtCenter(gameover, height, width);
-                    height = PrintAtCenter(points + userPoints, height, width);
+                    height = PrintAtCenter(gameover, height);
+                    height = PrintAtCenter(points + userPoints, height);
 
                     //------------------------------------------------Exit Game----------------------------------------------------
                     
                     //Print Exit Game
-                    height = PrintAtCenter(exit, height, width);
+                    height = PrintAtCenter(exit, height);
 
                     //Make a loop until user press enter key to exit the game
                     while (Console.ReadKey().Key != ConsoleKey.Enter)
                     {
-                        height = PrintAtCenter(exit, height, width);
+                        height = PrintAtCenter(exit, height);
                     }
                     Environment.Exit(0);
                 }
