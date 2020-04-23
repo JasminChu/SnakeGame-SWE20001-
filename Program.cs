@@ -9,6 +9,20 @@ using System.Windows.Forms;
 
 namespace Snake
 {
+    //draw the food
+    static void DrawFood()
+    {
+      Console.ForegroundColor = ConsoleColor.Yellow;
+      Console.Write("@");
+    }
+    //draw obstacles
+    static void DrawObstacle()
+    {
+      Console.ForegroundColor = ConsoleColor.Cyan;
+      Console.Write("=");
+    }
+    
+    
     struct Position
     {
         public int row;
@@ -24,7 +38,6 @@ namespace Snake
     {
         static void Main(string[] args)
         {
-            //JASMINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
             //backgorund sound is played when the player start the game
             SoundPlayer player = new SoundPlayer();
             player.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "/mainmenu.wav";
@@ -57,7 +70,6 @@ namespace Snake
             //Creating a linkedlist 
             //Using List class 
             //list to store position of obstacles
-            //JASMINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
             //The obstacles are randomizd so it will appear randomly everytime user play it
             List<Position> obstacles = new List<Position>()
                     {
@@ -78,9 +90,8 @@ namespace Snake
             {
 
                 //drawing obstacles
-                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.SetCursorPosition(obstacle.col, obstacle.row);
-                Console.Write("=");
+                DrawObstacle();
             }
 
             //creating snake body (5 "*")
@@ -90,7 +101,6 @@ namespace Snake
             //Set 5 items in snakeElements by setting the position (0,i)
             //i increase every time until 5
             //snakeElements used to store the snake body elements (*)
-            //JASMINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
             //Reduce the body length of snake to 3 units of * 
             Queue<Position> snakeElements = new Queue<Position>();
             for (int i = 0; i <= 3; i++)
@@ -109,8 +119,7 @@ namespace Snake
             //new food will be created if snake eat food OR obstacle has the same position with food
             while (snakeElements.Contains(food) || obstacles.Contains(food));
             Console.SetCursorPosition(food.col, food.row);
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.Write("@");
+            DrawFood();
 
             //drawing snake body ("*")
             //set color and position of each of the part of body in snakeElements
@@ -167,7 +176,6 @@ namespace Snake
                 //Stack which is a linear data structure is used
                 if (snakeElements.Contains(snakeNewHead) || obstacles.Contains(snakeNewHead))
                 {
-                    //JASMINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
                     //Game over sound will display if the snake die
                     SoundPlayer player1 = new SoundPlayer();
                     player1.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "/die.wav";
@@ -195,7 +203,7 @@ namespace Snake
                     Console.SetCursorPosition(width, height);
                     Console.WriteLine(points, userPoints);
 
-                    //JASMINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+
                     //------------------------------------------------Exit Game----------------------------------------------------
                     string exit = "Press Enter to exit.";
 
@@ -244,8 +252,7 @@ namespace Snake
 
                     lastFoodTime = Environment.TickCount;
                     Console.SetCursorPosition(food.col, food.row);
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.Write("@"); //Creating food
+                    DrawFood();
                     sleepTime--;
 
                     Position obstacle = new Position();
@@ -261,8 +268,7 @@ namespace Snake
                     //the position of food and obstacle is different
                     obstacles.Add(obstacle); //then obstacle will be generated
                     Console.SetCursorPosition(obstacle.col, obstacle.row);
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.Write("=");
+                    DrawObstacle();
                 }
                 else
                 {
@@ -294,8 +300,7 @@ namespace Snake
                 }
 
                 Console.SetCursorPosition(food.col, food.row); //creating food
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write("@");
+               DrawFood();
 
                 sleepTime -= 0.01;
 
