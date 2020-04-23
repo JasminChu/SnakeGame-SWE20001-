@@ -30,7 +30,6 @@ namespace Snake
             player.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "/mainmenu.wav";
             player.Play();
 
-
             byte right = 0;
             byte left = 1;
             byte down = 2;
@@ -38,8 +37,7 @@ namespace Snake
             int lastFoodTime = 0;
             int foodDissapearTime = 8000;
             int negativePoints = 0;
-            //-------------------------------------life---------------------------------
-            int life = 3;
+
             //Array which is a linear data structure is used 
             //position store direction (array)
             Position[] directions = new Position[]
@@ -175,69 +173,45 @@ namespace Snake
                     player1.SoundLocation = AppDomain.CurrentDomain.BaseDirectory + "/die.wav";
                     player1.PlaySync();
 
-                    //Remove the obstacles which the snake has eaten
-                    obstacles.Remove(snakeNewHead);
+                    //displayed when game over
+                    //------------------------------------------------GameOver----------------------------------------------------
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    string gameover = "Game over!";
+                    string points = "Your points are: {0}";
+                    int height = decimal.ToInt32((Console.WindowHeight) / 2);
+                    int width = decimal.ToInt32((Console.WindowWidth - gameover.Length) / 2);
+                    int userPoints = (snakeElements.Count - 6) * 100 - negativePoints;
+                    Console.WriteLine(userPoints);
 
-                    //If the life is greater than 0, when the snake eat the obstacle, the life will minus
-                    //New obstacle will be randomize
-                    if(life > 0)
+                    //if (userPoints < 0) userPoints = 0;
+                    userPoints = Math.Max(userPoints, 0);
+
+                    Console.SetCursorPosition(width, height);
+                    Console.WriteLine(gameover);
+
+                    width = decimal.ToInt32((Console.WindowWidth - points.Length) / 2);
+                    height += 1;
+
+                    Console.SetCursorPosition(width, height);
+                    Console.WriteLine(points, userPoints);
+
+                    //JASMINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
+                    //------------------------------------------------Exit Game----------------------------------------------------
+                    string exit = "Press Enter to exit.";
+
+                    width = decimal.ToInt32((Console.WindowWidth - exit.Length) / 2);
+                    height += 1;
+
+                    Console.SetCursorPosition(width, height);
+                    Console.WriteLine(exit);
+
+                    while (Console.ReadKey().Key != ConsoleKey.Enter)
                     {
-                        life -= 1;
-
-                        Position obstacle = new Position();
-                        //generate new position for the obstacles
-                        do
-                        {
-                            obstacle = new Position(randomNumbersGenerator.Next(0, Console.WindowHeight),
-                                randomNumbersGenerator.Next(0, Console.WindowWidth));
-                        } while (snakeElements.Contains(obstacle) || //if snake eat the obstacle
-                        obstacles.Contains(obstacle) ||         //if obstacles appear at the same position
-                        (food.row != obstacle.row && food.col != obstacle.row));
-                        //the position of food and obstacle is different
-                        obstacles.Add(obstacle); //then obstacle will be generated
-                        Console.SetCursorPosition(obstacle.col, obstacle.row);
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.Write("=");
-
-                        if (player1.IsLoadCompleted == true)
-                        {
-                            player.Play();
-                        }
-                    }
-                    else
-                    {
-                        //displayed when game over
-                        //--------------------------------------GameOver-------------------------------------------
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        string gameover = "Game over!";
-                        string points = "Your points are: {0}";
-                        int height = decimal.ToInt32((Console.WindowHeight) / 2);
-                        int width = decimal.ToInt32((Console.WindowWidth - gameover.Length) / 2);
-                        int userPoints = (snakeElements.Count - 6) * 100 - negativePoints;
-                        userPoints -= ((3 - life) * 10);
-                        //if (userPoints < 0) userPoints = 0;
-                        userPoints = Math.Max(userPoints, 0);
-
+                        height += 1;
                         Console.SetCursorPosition(width, height);
-                        Console.WriteLine(gameover);
-
-                        width = decimal.ToInt32((Console.WindowWidth - points.Length) / 2);
-                        height = decimal.ToInt32((Console.WindowHeight) / 2) + 1;
-
-                        Console.SetCursorPosition(width, height);
-                        Console.WriteLine(points, userPoints);
-
-                        //JASMINNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
-                        //--------------------------------------Exit Game-------------------------------------------
-                        string exit = "Press Enter to exit.";
                         Console.WriteLine(exit);
-
-                        while (Console.ReadKey().Key != ConsoleKey.Enter)
-                        {
-                            Console.WriteLine(exit);
-                        }
-                        Environment.Exit(0);
                     }
+                    Environment.Exit(0);
                 }
 
                 //Set the position of the snake
@@ -278,7 +252,6 @@ namespace Snake
                     //generate new position for the obstacles
                     do
                     {
-
                         obstacle = new Position(randomNumbersGenerator.Next(0, Console.WindowHeight),
                             randomNumbersGenerator.Next(0, Console.WindowWidth));
                     }
@@ -303,7 +276,7 @@ namespace Snake
 
                 //If the food appear at the console window (whole game time minus time of last food）
                 //is greater than the foodDissapearTime which intialise is 8000
-                //------------------------------FoodRelocateTime--------------------------------------
+                //----------------------------------------------FoodRelocateTime--------------------------------------------------
                 //add another 5000 time to extend the food relocate time
                 if (Environment.TickCount - lastFoodTime >= foodDissapearTime+5000)
                 {
