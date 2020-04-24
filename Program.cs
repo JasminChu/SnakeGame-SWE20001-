@@ -99,7 +99,7 @@ namespace Snake
             byte down = 2;
             byte up = 3;
             int lastFoodTime = 0;
-            int foodDissapearTime = 8000;
+            int foodDissapearTime = 12000;
             int negativePoints = 0;
             int winningscore = 10;
             int _scorecount = 0;
@@ -126,7 +126,6 @@ namespace Snake
             int direction = right;
             Random randomNumbersGenerator = new Random();
             Console.BufferHeight = Console.WindowHeight;
-            lastFoodTime = Environment.TickCount;
 
             //Linked List which is a linear data structure is used 
             //Creating a linkedlist 
@@ -175,6 +174,7 @@ namespace Snake
             //creating food in the game
             Position food = new Position();
             food = CreateFood(food, randomNumbersGenerator, snakeElements, obstacles);
+            lastFoodTime = Environment.TickCount;
 
             //drawing snake body ("*")
             //set color and position of each of the part of body in snakeElements
@@ -319,6 +319,7 @@ namespace Snake
                     //feeding the snake
                     //generate new position for the food
                     food = CreateFood(food, randomNumbersGenerator, snakeElements, obstacles);
+                    lastFoodTime = Environment.TickCount;
                     sleepTime--;
 
                     Position obstacle = new Position();
