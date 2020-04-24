@@ -342,7 +342,7 @@ namespace Snake
                 //----------------------------------------------FoodRelocateTime--------------------------------------------------
                 
                 //add another 5000 time to extend the food relocate time
-                if (Environment.TickCount - lastFoodTime >= foodDissapearTime + 5000)
+                if (Environment.TickCount - lastFoodTime >= foodDissapearTime)
                 {
                     negativePoints = negativePoints + 50;
                     Console.SetCursorPosition(food.col, food.row); //the cursor position will set to the food position.
