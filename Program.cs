@@ -109,6 +109,10 @@ namespace Snake
                 string previouswinner = File.ReadAllText("winner.txt");
                 Scoreboard.WriteAt("Previous Winner: "+previouswinner, 0, 0);
             }
+            else if (File.Exists("winner.txt") == false)
+            {
+                File.Create("winner.txt");
+            }
             Scoreboard.WriteAt("Your Current Score", 0, 1);
             Scoreboard.WriteScore(_scorecount, 0, 2);
             

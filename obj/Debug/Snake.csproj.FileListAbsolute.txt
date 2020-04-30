@@ -26,3 +26,9 @@ C:\Users\User\Desktop\SnakeGame-SWE20001-\obj\Debug\Snake.csprojAssemblyReferenc
 C:\Users\User\Desktop\SnakeGame-SWE20001-\obj\Debug\Snake.csproj.CoreCompileInputs.cache
 C:\Users\User\Desktop\SnakeGame-SWE20001-\obj\Debug\Snake.exe
 C:\Users\User\Desktop\SnakeGame-SWE20001-\obj\Debug\Snake.pdb
+C:\Users\jjtla\Desktop\SnakeGame-SWE20001-\bin\Debug\Snake.exe.config
+C:\Users\jjtla\Desktop\SnakeGame-SWE20001-\bin\Debug\Snake.exe
+C:\Users\jjtla\Desktop\SnakeGame-SWE20001-\bin\Debug\Snake.pdb
+C:\Users\jjtla\Desktop\SnakeGame-SWE20001-\obj\Debug\Snake.csprojAssemblyReference.cache
+C:\Users\jjtla\Desktop\SnakeGame-SWE20001-\obj\Debug\Snake.exe
+C:\Users\jjtla\Desktop\SnakeGame-SWE20001-\obj\Debug\Snake.pdb
