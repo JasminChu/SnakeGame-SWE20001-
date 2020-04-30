@@ -243,7 +243,7 @@ namespace Snake
                     string points = "Your points are: ";
                     string exit = "Press Enter to exit.";
 
-                    int height = decimal.ToInt32((Console.WindowHeight) / 2)-1;
+                    int height = decimal.ToInt32((Console.WindowHeight) / 2)-3;
                     int width = decimal.ToInt32((Console.WindowWidth - gameover.Length) / 2);
 
                     int userPoints = (snakeElements.Count - 6) * 100 - negativePoints;
