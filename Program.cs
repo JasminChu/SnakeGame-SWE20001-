@@ -250,13 +250,9 @@ namespace Snake
                     int height = decimal.ToInt32((Console.WindowHeight) / 2)-3;
                     int width = decimal.ToInt32((Console.WindowWidth - gameover.Length) / 2);
 
-                    int userPoints = (snakeElements.Count - 6) * 100 - negativePoints;
-                    //if (userPoints < 0) userPoints = 0;
-                    userPoints = Math.Max(userPoints, 0);
-
                     //print Game over and points
-                    height = PrintAtCenter(gameover, height);
-                    height = PrintAtCenter(points + userPoints, height);
+                     height = PrintAtCenter(gameover, height);
+                     height = PrintAtCenter(points + _scorecount, height);
 
                     //------------------------------------------------Exit Game----------------------------------------------------
                     
